@@ -138,7 +138,7 @@ a {
   text-decoration: none;
 }
 
-.order-button, header .search-container button {
+header .search-container button, .order-button {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -151,8 +151,14 @@ a {
   padding: 5px 8px;
   cursor: pointer;
 }
-.order-button:focus, header .search-container button:focus, .order-button:hover, header .search-container button:hover {
+header .search-container button:focus, .order-button:focus, header .search-container button:hover, .order-button:hover {
   background-color: rgba(255, 120, 0, 0.5);
+}
+
+.cocktails-list li, .main-page .random-cocktail {
+  border: 2px solid #400000;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 #root {
@@ -168,6 +174,59 @@ a {
   color: #400000;
 }
 
+.no-available-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  text-align: center;
+  color: #400000;
+}
+
+.cocktail-information {
+  cursor: pointer;
+}
+.cocktail-information img {
+  width: 400px;
+  border-radius: 10px;
+}
+.cocktail-information h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: #400000;
+  margin: 20px 0;
+}
+.cocktail-information .cocktail-details {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.cocktail-information .cocktail-details h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  color: #800000;
+}
+.cocktail-information .cocktail-details p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: left;
+  color: #800000;
+}
+.cocktail-information .cocktail-details p span {
+  font-weight: 500;
+}
+
+.order-button {
+  font-size: 18px;
+}
+
 header {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -178,7 +237,7 @@ header {
   box-sizing: border-box;
   padding: 20px;
 }
-header a {
+header .logo-link {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -191,7 +250,7 @@ header a {
   flex-wrap: nowrap;
   gap: 0;
 }
-header a .cocktail-icon {
+header .logo-link .cocktail-icon {
   width: 50px;
   height: 50px;
 }
@@ -254,6 +313,12 @@ header .cart-container .bubble-icon span {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
   min-height: calc(100vh - 240px);
   background-color: #edbb99;
   padding: 40px 20px;
@@ -281,10 +346,8 @@ main {
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 30px;
-  border: 2px solid #400000;
-  border-radius: 10px;
-  padding: 20px;
   position: relative;
+  min-width: 200px;
 }
 .main-page .random-cocktail .recommendation-label {
   display: flex;
@@ -312,46 +375,20 @@ main {
   margin-top: 30px;
 }
 
-.cocktail-information img {
-  width: 400px;
-  border-radius: 10px;
-}
-.cocktail-information h2 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  text-align: center;
-  color: #400000;
-  margin: 20px 0;
-}
-.cocktail-information .cocktail-details {
+.cocktails-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1500px;
 }
-.cocktail-information .cocktail-details h3 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  text-align: center;
-  color: #800000;
+.cocktails-list li .cocktail-information img {
+  width: 300px;
 }
-.cocktail-information .cocktail-details p {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  text-align: left;
-  color: #800000;
-}
-.cocktail-information .cocktail-details p span {
-  font-weight: 500;
-}
-
-.order-button {
-  font-size: 18px;
+.cocktails-list li .cocktail-information h2 {
+  max-width: 300px;
 }
 
 footer {
@@ -401,6 +438,9 @@ footer ul {
     flex-direction: column;
   }
   .cocktail-information img {
+    width: 250px;
+  }
+  .cocktails-list li .cocktail-information img {
     width: 250px;
   }
 }

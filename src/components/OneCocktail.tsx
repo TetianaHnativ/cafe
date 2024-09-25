@@ -1,15 +1,16 @@
 import React from 'react';
-import { cocktailsSelector } from '../store/selectors.ts';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Cocktail } from '../components/interfaces.ts';
+import NoAvailableCocktails from './NoAvailableCocktails.tsx';
 
-const OneCocktail: React.FC = () => {
-    const cocktail = useSelector(cocktailsSelector)[0];
+const OneCocktail: React.FC<{ cocktail: Cocktail | null }> = ({ cocktail }) => {
 
     if (!cocktail) {
-        return <h2>No cocktail available</h2>;
+        return <></>;
     }
 
     const {
+        idDrink,
         strDrink,
         strDrinkThumb,
         strAlcoholic,
@@ -18,7 +19,7 @@ const OneCocktail: React.FC = () => {
     } = cocktail;
 
     return (
-        <div className="cocktail-information">
+        <Link to={`/cocktails/${idDrink}`} className="cocktail-information">
             <img src={strDrinkThumb} alt={strDrink} />
             <h2>{strDrink}</h2>
             <div className='cocktail-details'>
@@ -27,7 +28,7 @@ const OneCocktail: React.FC = () => {
                 <p><span>Type:</span> {strAlcoholic}</p>
                 <p><span>Glass:</span> {strGlass}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 

@@ -38,8 +38,6 @@ const CocktailPage: React.FC = () => {
 
     return (
         <div className="cocktail-page">
-            <OneCocktail></OneCocktail>
-
             <div className='cocktail-ingredients'>
                 <h3>Ingredients</h3>
                 <ul>
