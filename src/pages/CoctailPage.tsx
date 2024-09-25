@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { fetchCocktails } from '../store/reducer.ts';
 import { AppDispatch } from '../store/store.ts';
 import { cocktailsSelector } from '../store/selectors.ts';
 import OneCocktail from '../components/OneCocktail.tsx';
+import NoAvailableCocktails from '../components/NoAvailableCocktails.tsx';
 
 const CocktailPage: React.FC = () => {
-    const cocktail = useSelector(cocktailsSelector)[0];
+    const { id } = useParams<{ id: string }>();
 
-    if (!cocktail) {
-        return <h2>No cocktail available</h2>;
-    }
+    const dispatch: AppDispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCocktails(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`))
+    }, [dispatch, id]);
+
+    const cocktails = useSelector(cocktailsSelector);
+
+    const cocktail = cocktails && cocktails.length > 0 ? cocktails[0] : null;
+
+    if (!cocktail) return <NoAvailableCocktails></NoAvailableCocktails>;
+
     const {
         strInstructions,
         strIngredient1,
@@ -38,15 +49,18 @@ const CocktailPage: React.FC = () => {
 
     return (
         <div className="cocktail-page">
-            <div className='cocktail-ingredients'>
-                <h3>Ingredients</h3>
-                <ul>
-                    {ingredients.map((item, index) => (
-                        <li key={index}>
-                            {item.measure} {item.ingredient}
-                        </li>
-                    ))}
-                </ul>
+            <div className='cocktail-ingredients-container'>
+                <OneCocktail cocktail={cocktail}></OneCocktail>
+                <div className='cocktail-ingredients'>
+                    <h3>Ingredients</h3>
+                    <ul>
+                        {ingredients.map((item, index) => (
+                            <li key={index}>
+                                {item.measure} {item.ingredient}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
 
             <div className='cocktail-instructions'>

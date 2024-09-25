@@ -90,6 +90,7 @@ a {
 }
 
 .cocktail-information {
+    @include flex-property($gap: 20px, $flex-direction: column, $align-items: center);
     cursor: pointer;
 
     img {
@@ -99,11 +100,10 @@ a {
 
     h2 {
         @include text-styles($font-weight: $font-weight-600, $font-size: $font-size-24, $text-align: center, $text-color: $brown-color);
-        margin: 20px 0;
     }
 
     .cocktail-details {
-        @include flex-property($gap: 20px, $flex-direction: column);
+        @include flex-property($gap: 30px, $flex-direction: column);
 
         h3 {
             @include text-styles($font-weight: $font-weight-500, $font-size: $font-size-20, $text-align: center);
@@ -203,7 +203,7 @@ main {
     @include flex-property($flex-direction: column, $align-items: center, $justify-content: center);
     min-height: calc(100vh - 240px);
     background-color: $background-color;
-    padding: 40px 20px;
+    padding: 100px 20px;
 }
 
 // ------------------------------ Main Page ------------------------------
@@ -213,6 +213,7 @@ main {
 
     h1 {
         @include text-styles($font-weight: $font-weight-700, $font-size: $font-size-30, $text-align: center, $text-color: $brown-color);
+        margin-bottom: 20px;
     }
 
     .random-cocktail {
@@ -265,6 +266,55 @@ main {
     }
 }
 
+// ------------------------------ Cocktail Page ------------------------------
+
+.cocktail-page {
+    @include flex-property($gap: 50px, $flex-direction: column, $align-items: center);
+
+    h3 {
+        @include text-styles($font-weight: $font-weight-500, $font-size: $font-size-20, $text-align: center);
+        margin-bottom: 30px;
+    }
+
+    .cocktail-ingredients-container {
+        max-width: 400px;
+    }
+
+    .cocktail-information {
+        gap: 40px;
+
+        .cocktail-details {
+            align-items: flex-start;
+            width: 100%;
+
+            h3 {
+                align-self: center;
+                margin-bottom: 10px;
+            }
+
+            margin-bottom: 50px;
+        }
+    }
+
+    .cocktail-ingredients {
+        width: 100%;
+
+        ul {
+            @include flex-property($gap: 20px, $flex-direction: column, $align-items: flex-start);
+
+            li {
+                font-size: $font-size-18;
+            }
+        }
+    }
+
+    .cocktail-instructions {
+        p {
+            line-height: 24px;
+            max-width: 800px;
+        }
+    }
+}
 
 // --------------------------------------- Footer ---------------------------------------
 
@@ -329,6 +379,14 @@ footer {
                 img {
                     width: 250px;
                 }
+            }
+        }
+    }
+
+    .cocktail-page {
+        .cocktail-information {
+            img {
+                width: 300px;
             }
         }
     }

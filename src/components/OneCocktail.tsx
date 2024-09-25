@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Cocktail } from '../components/interfaces.ts';
-import NoAvailableCocktails from './NoAvailableCocktails.tsx';
 
 const OneCocktail: React.FC<{ cocktail: Cocktail | null }> = ({ cocktail }) => {
 
@@ -19,14 +18,20 @@ const OneCocktail: React.FC<{ cocktail: Cocktail | null }> = ({ cocktail }) => {
     } = cocktail;
 
     return (
-        <Link to={`/cocktails/${idDrink}`} className="cocktail-information">
+        <Link to={`/cocktail/${idDrink}`} className="cocktail-information">
             <img src={strDrinkThumb} alt={strDrink} />
             <h2>{strDrink}</h2>
             <div className='cocktail-details'>
                 <h3>Details</h3>
-                <p><span>Category:</span> {strCategory}</p>
-                <p><span>Type:</span> {strAlcoholic}</p>
-                <p><span>Glass:</span> {strGlass}</p>
+                <p>
+                    <span>Category:</span> {strCategory}
+                </p>
+                <p>
+                    <span>Type:</span> {strAlcoholic}
+                </p>
+                <p>
+                    <span>Glass:</span> {strGlass}
+                </p>
             </div>
         </Link>
     );
