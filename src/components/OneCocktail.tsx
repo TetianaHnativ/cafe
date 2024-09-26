@@ -4,9 +4,7 @@ import { Cocktail } from '../components/interfaces.ts';
 
 const OneCocktail: React.FC<{ cocktail: Cocktail | null }> = ({ cocktail }) => {
 
-    if (!cocktail) {
-        return <></>;
-    }
+    if (!cocktail) return null;
 
     const {
         idDrink,

@@ -42,6 +42,12 @@ $orange-color: #ff7800;
     color: $text-color;
 }
 
+@mixin border-container($border-color: $brown-color, $border-radius: 10px, $padding: 20px) {
+    border: 2px solid $border-color;
+    border-radius: $border-radius;
+    padding: $padding;
+}
+
 // ---------------------------------- Extend/Inheritance ----------------------------------
 
 %flex-center {
@@ -63,12 +69,6 @@ $orange-color: #ff7800;
     }
 }
 
-%border-container {
-    border: 2px solid $brown-color;
-    border-radius: 10px;
-    padding: 20px;
-}
-
 
 // --------------------------------------- Common ---------------------------------------
 
@@ -87,41 +87,6 @@ a {
 
 .no-available-title {
     @include text-styles($font-weight: $font-weight-600, $font-size: $font-size-28, $text-align: center, $text-color: $brown-color);
-}
-
-.cocktail-information {
-    @include flex-property($gap: 20px, $flex-direction: column, $align-items: center);
-    cursor: pointer;
-
-    img {
-        width: 400px;
-        border-radius: 10px;
-    }
-
-    h2 {
-        @include text-styles($font-weight: $font-weight-600, $font-size: $font-size-24, $text-align: center, $text-color: $brown-color);
-    }
-
-    .cocktail-details {
-        @include flex-property($gap: 30px, $flex-direction: column);
-
-        h3 {
-            @include text-styles($font-weight: $font-weight-500, $font-size: $font-size-20, $text-align: center);
-        }
-
-        p {
-            @include text-styles($font-size: $font-size-18);
-
-            span {
-                font-weight: $font-weight-500;
-            }
-        }
-    }
-}
-
-.order-button {
-    @extend %button-styles;
-    font-size: $font-size-18;
 }
 
 // --------------------------------------- Header ---------------------------------------
@@ -206,6 +171,42 @@ main {
     padding: 100px 20px;
 }
 
+.cocktail-information {
+    @include flex-property($gap: 20px, $flex-direction: column, $align-items: center);
+    cursor: pointer;
+
+    img {
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        @include text-styles($font-weight: $font-weight-600, $font-size: $font-size-24, $text-align: center, $text-color: $brown-color);
+    }
+
+    .cocktail-details {
+        @include flex-property($gap: 30px, $flex-direction: column);
+        width: 100%;
+
+        h3 {
+            @include text-styles($font-weight: $font-weight-500, $font-size: $font-size-20, $text-align: center);
+        }
+
+        p {
+            @include text-styles($font-size: $font-size-18);
+
+            span {
+                font-weight: $font-weight-500;
+            }
+        }
+    }
+}
+
+.order-button {
+    @extend %button-styles;
+    font-size: $font-size-18;
+}
+
 // ------------------------------ Main Page ------------------------------
 
 .main-page {
@@ -218,7 +219,7 @@ main {
 
     .random-cocktail {
         @include flex-property($gap: 30px, $flex-direction: column, $align-items: center);
-        @extend %border-container;
+        @include border-container;
         position: relative;
         min-width: 200px;
 
@@ -242,25 +243,28 @@ main {
             margin-top: 30px;
         }
 
+        .cocktail-information {
+            p {
+                padding-left: 20px;
+
+            }
+        }
     }
 }
 
-// ------------------------------ Cocktails Page ------------------------------
+// ------------------------------ Cocktails List ------------------------------
 
 .cocktails-list {
     @include flex-property($gap: 30px, $justify-content: center, $flex-wrap: wrap);
     max-width: 1500px;
 
     li {
-        @extend %border-container;
+        @include border-container;
+        max-width: 300px;
 
         .cocktail-information {
             img {
                 width: 300px;
-            }
-
-            h2 {
-                max-width: 300px;
             }
         }
     }
@@ -331,6 +335,74 @@ footer {
     }
 }
 
+// --------------------------------------- Cart Modal ---------------------------------------
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.8);
+}
+
+.cart-modal {
+    @include flex-property($gap: 30px, $flex-direction: column, $align-items: center);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $second-background-color;
+
+    @include border-container($border-color: $orange-color);
+    max-height: 600px;
+    padding-top: 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    box-shadow: 0 0 30px 10px rgb(0, 0, 0, 0.5);
+
+    .cart-close-butoon,
+    .cocktail-delete-button {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        @include flex-property($align-items: center, $justify-content: center);
+    }
+
+    .cart-close-butoon {
+        top: 10px;
+        right: 10px;
+        @include border-container($border-radius: 5px, $padding: 10px);
+        border-width: 1px;
+    }
+
+    .cocktails-list {
+        margin-top: 30px;
+
+        li {
+            max-width: 250px;
+            position: relative;
+
+            .cocktail-information {
+                img {
+                    width: 250px;
+                }
+            }
+
+            .cocktail-delete-button {
+                top: 5px;
+                right: 5px;
+                @include border-container($border-color: $orange-color, $border-radius: 50%, $padding: 5px);
+            }
+        }
+    }
+
+    .confirm-order-button {
+        @extend %button-styles;
+    }
+}
+
 // --------------------------------------- Adaptive Header ---------------------------------------
 
 @media (max-width:768px) {
@@ -387,6 +459,18 @@ footer {
         .cocktail-information {
             img {
                 width: 300px;
+            }
+        }
+    }
+
+    .cart-modal {
+        .cocktails-list {
+            li {
+                .cocktail-information {
+                    img {
+                        width: 200px;
+                    }
+                }
             }
         }
     }

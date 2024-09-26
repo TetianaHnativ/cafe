@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Cocktail, State } from "../components/interfaces";
 
+const updateCartState = (state: State) => {
+    sessionStorage.setItem('cart', JSON.stringify(state.cart));
+};
+
 export const initialState: State = {
     cocktails: [],
-    cart: [],
+    cart: JSON.parse(sessionStorage.getItem('cart') || '[]'),
     error: null,
 }
 
@@ -25,13 +29,19 @@ const storeSlice = createSlice({
     initialState,
     reducers: {
         cartAdd: (state, action: PayloadAction<Cocktail>) => {
-            state.cart.push(action.payload);
+            const isAlreadyInCart = state.cart.some(item => item.idDrink === action.payload.idDrink);
+            if (!isAlreadyInCart) {
+                state.cart.push(action.payload);
+                updateCartState(state);
+            }
         },
         cartRemove: (state, action: PayloadAction<string>) => {
             state.cart = state.cart.filter((item) => item.idDrink !== action.payload);
+            updateCartState(state);
         },
-        cartAll: (state) => {
+        cartRemoveAll: (state) => {
             state.cart = [];
+            updateCartState(state);
         },
     },
     extraReducers: (builder) => {
@@ -47,6 +57,6 @@ const storeSlice = createSlice({
     }
 });
 
-export const { cartAdd, cartRemove, cartAll } = storeSlice.actions;
+export const { cartAdd, cartRemove, cartRemoveAll } = storeSlice.actions;
 
 export default storeSlice.reducer;

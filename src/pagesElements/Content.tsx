@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MainPage from '../pages/MainPage';
-import CocktailsPage from '../pages/CocktailsPage';
-import CocktailPage from '../pages/CoctailPage';
+import MainPage from './MainPage';
+import CocktailsPage from './CocktailsPage';
+import CocktailPage from './CoctailPage';
 
 const Content: React.FC = () => {
     return (

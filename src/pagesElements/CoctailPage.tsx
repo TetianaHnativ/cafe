@@ -5,6 +5,7 @@ import { fetchCocktails } from '../store/reducer.ts';
 import { AppDispatch } from '../store/store.ts';
 import { cocktailsSelector } from '../store/selectors.ts';
 import OneCocktail from '../components/OneCocktail.tsx';
+import OrderButton from '../components/OrderButton.tsx';
 import NoAvailableCocktails from '../components/NoAvailableCocktails.tsx';
 
 const CocktailPage: React.FC = () => {
@@ -67,6 +68,8 @@ const CocktailPage: React.FC = () => {
                 <h3>Instructions</h3>
                 <p>{strInstructions}</p>
             </div>
+
+            <OrderButton cocktail={cocktail}></OrderButton>
         </div>
     );
 }

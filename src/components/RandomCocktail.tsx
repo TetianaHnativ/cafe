@@ -15,7 +15,7 @@ const RandomCocktail: React.FC = () => {
                 <span>Personal recommendation</span>
             </div>
             <OneCocktail cocktail={cocktail}></OneCocktail>
-            <OrderButton></OrderButton>
+            <OrderButton cocktail={cocktail}></OrderButton>
         </div>
     ) : <></>;
 }

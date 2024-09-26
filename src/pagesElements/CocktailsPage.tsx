@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchCocktails } from '../store/reducer.ts';
 import { AppDispatch } from '../store/store.ts';
 import { cocktailsSelector } from '../store/selectors.ts';
-import OneCocktail from '../components/OneCocktail.tsx';
-import NoAvailableCocktails from '../components/NoAvailableCocktails.tsx';
+import Cocktails from '../components/Cocktails.tsx';
 
 const CocktailsPage: React.FC = () => {
 
@@ -21,20 +20,7 @@ const CocktailsPage: React.FC = () => {
 
     const cocktails = useSelector(cocktailsSelector);
 
-    return cocktails ? (
-        <>
-            <ul className='cocktails-list'>
-                {
-                    cocktails?.map((item) => (
-                        <li key={item.idDrink}>
-                            <OneCocktail cocktail={item}></OneCocktail>
-                        </li>
-                    ))
-                }
-
-            </ul>
-        </>
-    ) : <NoAvailableCocktails></NoAvailableCocktails>;
+    return <Cocktails cocktails={cocktails} isButton={false}></Cocktails>;
 }
 
 export default CocktailsPage;

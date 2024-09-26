@@ -138,7 +138,7 @@ a {
   text-decoration: none;
 }
 
-header .search-container button, .order-button {
+.cart-modal .confirm-order-button, .order-button, header .search-container button {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -151,14 +151,8 @@ header .search-container button, .order-button {
   padding: 5px 8px;
   cursor: pointer;
 }
-header .search-container button:focus, .order-button:focus, header .search-container button:hover, .order-button:hover {
+.cart-modal .confirm-order-button:focus, .order-button:focus, header .search-container button:focus, .cart-modal .confirm-order-button:hover, .order-button:hover, header .search-container button:hover {
   background-color: rgba(255, 120, 0, 0.5);
-}
-
-.cocktails-list li, .main-page .random-cocktail {
-  border: 2px solid #400000;
-  border-radius: 10px;
-  padding: 20px;
 }
 
 #root {
@@ -180,56 +174,6 @@ a {
   font-size: 28px;
   text-align: center;
   color: #400000;
-}
-
-.cocktail-information {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  gap: 20px;
-  cursor: pointer;
-}
-.cocktail-information img {
-  width: 400px;
-  border-radius: 10px;
-}
-.cocktail-information h2 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  text-align: center;
-  color: #400000;
-}
-.cocktail-information .cocktail-details {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  gap: 30px;
-}
-.cocktail-information .cocktail-details h3 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  text-align: center;
-  color: #800000;
-}
-.cocktail-information .cocktail-details p {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  text-align: left;
-  color: #800000;
-}
-.cocktail-information .cocktail-details p span {
-  font-weight: 500;
-}
-
-.order-button {
-  font-size: 18px;
 }
 
 header {
@@ -329,6 +273,57 @@ main {
   padding: 100px 20px;
 }
 
+.cocktail-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 20px;
+  cursor: pointer;
+}
+.cocktail-information img {
+  width: 400px;
+  border-radius: 10px;
+}
+.cocktail-information h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: #400000;
+}
+.cocktail-information .cocktail-details {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 30px;
+  width: 100%;
+}
+.cocktail-information .cocktail-details h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  color: #800000;
+}
+.cocktail-information .cocktail-details p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: left;
+  color: #800000;
+}
+.cocktail-information .cocktail-details p span {
+  font-weight: 500;
+}
+
+.order-button {
+  font-size: 18px;
+}
+
 .main-page {
   display: flex;
   flex-direction: column;
@@ -352,6 +347,9 @@ main {
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 30px;
+  border: 2px solid #400000;
+  border-radius: 10px;
+  padding: 20px;
   position: relative;
   min-width: 200px;
 }
@@ -380,6 +378,9 @@ main {
 .main-page .random-cocktail a {
   margin-top: 30px;
 }
+.main-page .random-cocktail .cocktail-information p {
+  padding-left: 20px;
+}
 
 .cocktails-list {
   display: flex;
@@ -390,11 +391,14 @@ main {
   gap: 30px;
   max-width: 1500px;
 }
+.cocktails-list li {
+  border: 2px solid #400000;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 300px;
+}
 .cocktails-list li .cocktail-information img {
   width: 300px;
-}
-.cocktails-list li .cocktail-information h2 {
-  max-width: 300px;
 }
 
 .cocktail-page {
@@ -473,6 +477,74 @@ footer ul {
   color: #400000;
 }
 
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.8);
+}
+
+.cart-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f8c471;
+  border: 2px solid #ff7800;
+  border-radius: 10px;
+  padding: 20px;
+  max-height: 600px;
+  padding-top: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.5);
+}
+.cart-modal .cart-close-butoon,
+.cart-modal .cocktail-delete-button {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+.cart-modal .cart-close-butoon {
+  top: 10px;
+  right: 10px;
+  border: 2px solid #400000;
+  border-radius: 5px;
+  padding: 10px;
+  border-width: 1px;
+}
+.cart-modal .cocktails-list {
+  margin-top: 30px;
+}
+.cart-modal .cocktails-list li {
+  max-width: 250px;
+  position: relative;
+}
+.cart-modal .cocktails-list li .cocktail-information img {
+  width: 250px;
+}
+.cart-modal .cocktails-list li .cocktail-delete-button {
+  top: 5px;
+  right: 5px;
+  border: 2px solid #ff7800;
+  border-radius: 50%;
+  padding: 5px;
+}
 @media (max-width: 768px) {
   header {
     grid-template-columns: auto auto;
@@ -502,4 +574,9 @@ footer ul {
   .cocktail-page .cocktail-information img {
     width: 300px;
   }
-}/*# sourceMappingURL=index.css.map */
+  .cart-modal .cocktails-list li .cocktail-information img {
+    width: 200px;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
